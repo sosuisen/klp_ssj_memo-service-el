@@ -14,11 +14,17 @@
 		<input type="text" name="memo">
 		<button>追加</button>
 	</form>
-	(${today})
 	<h2>メモ一覧</h2>
 	<ul>
 	<c:forEach var="memo" items="${memoRecordList}">
-		<li>${ memo.text } (${ memo.date })</li>
+		<c:choose>
+			<c:when test="${ memo.text.length() > 7 }">
+				<li style="color: red">${ memo.text }(${ memo.date })</li>
+			</c:when>
+			<c:otherwise>
+		        <li>${ memo.text }(${ memo.date })</li>
+		    </c:otherwise>
+		</c:choose>
 	</c:forEach>
 	</ul>
 </body>

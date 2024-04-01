@@ -1,7 +1,6 @@
 package com.example;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.model.MemoDTO;
@@ -30,10 +29,6 @@ public class MemoServlet extends HttpServlet {
 		
 		// データをViewに渡すため、リクエストスコープへセットします。
 		request.setAttribute("memoRecordList", memoRecordList);
-		
-		// 今日の日付も表示したいので渡します。
-		request.setAttribute("today", LocalDateTime.now().toString().substring(0, 10));
-		
 		request.getRequestDispatcher("/WEB-INF/memo.jsp").forward(request, response);
 	}
 
