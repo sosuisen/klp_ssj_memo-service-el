@@ -1,8 +1,10 @@
 package com.example;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import com.example.model.MemoDTO;
 import com.example.model.MemoManager;
 
 import jakarta.servlet.ServletException;
@@ -10,9 +12,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+
 // Controller
 public class MemoServlet extends HttpServlet {
-	
 	private static final MemoManager model = new MemoManager();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,11 +22,18 @@ public class MemoServlet extends HttpServlet {
 		var memoList = model.getMemoList();
 
 		// Modelから受け取ったデータをViewで表示しやすいよう加工するのは、Controllerの役割です。
-		// textフィールドのみを取り出したListに変換します。
-		List<String> textList = memoList.stream().map(memo -> memo.getText()).toList();
+		// 日付をLocalDateTimeオブジェクト（日時の書式は"2024-04-01T21:20:08.3262465"）から
+		// 文字列"2024-04-01"に変換したリストを作成します。
+		List<MemoDTO> memoRecordList = memoList.stream().map(memo -> 
+			new MemoDTO(memo.getText(), memo.getCreatedAt().toString().substring(0, 10))
+		).toList();
 		
 		// データをViewに渡すため、リクエストスコープへセットします。
-		request.setAttribute("memoList", textList);
+		request.setAttribute("memoRecordList", memoRecordList);
+		
+		// 今日の日付も表示したいので渡します。
+		request.setAttribute("today", LocalDateTime.now().toString().substring(0, 10));
+		
 		request.getRequestDispatcher("/WEB-INF/memo.jsp").forward(request, response);
 	}
 
@@ -41,3 +50,4 @@ public class MemoServlet extends HttpServlet {
 		doGet(request, response);
 	}
 }
+
