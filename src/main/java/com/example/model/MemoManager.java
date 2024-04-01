@@ -29,9 +29,9 @@ public class MemoManager {
 		return new ArrayList<Memo>();
 	}
 	
-	synchronized public void addMemo(String text) {
+	synchronized public void addMemo(String author, String text) {
 		try {
-			var memo = new Memo(text, LocalDateTime.now());
+			var memo = new Memo(author, text, LocalDateTime.now());
 			var memoList = getMemoList();
 			memoList.add(memo);
 			

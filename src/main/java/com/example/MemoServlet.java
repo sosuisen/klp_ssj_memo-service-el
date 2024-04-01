@@ -24,7 +24,7 @@ public class MemoServlet extends HttpServlet {
 		// 日付をLocalDateTimeオブジェクト（日時の書式は"2024-04-01T21:20:08.3262465"）から
 		// 文字列"2024-04-01"に変換したリストを作成します。
 		List<MemoDTO> memoRecordList = memoList.stream().map(memo -> 
-			new MemoDTO(memo.getText(), memo.getCreatedAt().toString().substring(0, 10))
+			new MemoDTO(memo.getAuthor(), memo.getText(), memo.getCreatedAt().toString().substring(0, 10))
 		).toList();
 		
 		// データをViewに渡すため、リクエストスコープへセットします。
@@ -36,10 +36,11 @@ public class MemoServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		// Webブラウザから送られてきたデータを取得します。
+		var author = request.getParameter("author");
 		var memo = request.getParameter("memo");
 
 		// Modelのメモ追加機能を呼び出します。
-		model.addMemo(memo);
+		model.addMemo(author, memo);
 		
 		// この後の処理はdoGetメソッドと同じなので、doGetに任せます。
 		doGet(request, response);

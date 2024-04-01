@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor // JSON変換時に必要
 public class Memo {
+	private String author;
 	private String text;
 	private LocalDateTime createdAt;
 }
