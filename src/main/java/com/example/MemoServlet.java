@@ -23,12 +23,12 @@ public class MemoServlet extends HttpServlet {
 		// Modelから受け取ったデータをViewで表示しやすいよう加工するのは、Controllerの役割です。
 		// 日付をLocalDateTimeオブジェクト（日時の書式は"2024-04-01T21:20:08.3262465"）から
 		// 文字列"2024-04-01"に変換したリストを作成します。
-		List<MemoDTO> memoRecordList = memoList.stream().map(memo -> 
+		List<MemoDTO> memoDTOList = memoList.stream().map(memo -> 
 			new MemoDTO(memo.getAuthor(), memo.getText(), memo.getCreatedAt().toString().substring(0, 10))
 		).toList();
 		
 		// データをViewに渡すため、リクエストスコープへセットします。
-		request.setAttribute("memoRecordList", memoRecordList);
+		request.setAttribute("memoDTOList", memoDTOList);
 		request.getRequestDispatcher("/WEB-INF/memo.jsp").forward(request, response);
 	}
 
