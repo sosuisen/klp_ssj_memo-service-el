@@ -22,7 +22,4 @@ public class MemoDTO {
 		this.text = text;
 		this.date = date;
 	}
-
-	public MemoDTO() {
-	}
 }
