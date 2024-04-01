@@ -16,7 +16,7 @@
 	</form>
 	<h2>メモ一覧</h2>
 	<ul>
-	<c:forEach var="memo" items="${memoRecordList}">
+	<c:forEach var="memo" items="${memoDTOList}">
 		<li>${ memo.text } (${ memo.date })</li>
 	</c:forEach>
 	</ul>
