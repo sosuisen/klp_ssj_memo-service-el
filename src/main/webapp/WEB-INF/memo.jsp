@@ -16,7 +16,7 @@
 	</form>
 	<h2>メモ一覧</h2>
 	<ul>
-	<c:forEach var="memo" items="${memoRecordList}">
+	<c:forEach var="memo" items="${memoDTOList}">
 		<c:choose>
 			<c:when test="${ memo.text.length() > 7 }">
 				<li style="color: red">${ memo.text }(${ memo.date })</li>
