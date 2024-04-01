@@ -9,14 +9,16 @@
 </head>
 <body>
 	<h1>メモを入力してください</h1>
+	
 	<form action="./" method="post">
 		<input type="text" name="memo">
 		<button>追加</button>
 	</form>
+	(${today})
 	<h2>メモ一覧</h2>
 	<ul>
-	<c:forEach var="memo" items="${memoList}">
-		<li>${ memo }
+	<c:forEach var="memo" items="${memoRecordList}">
+		<li>${ memo.text } (${ memo.date })</li>
 	</c:forEach>
 	</ul>
 </body>
