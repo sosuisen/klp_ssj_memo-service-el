@@ -2,19 +2,29 @@ package com.example.model;
 
 import java.time.LocalDateTime;
 
-public class Memo {
+// Jsonbライブラリを用いて、
+// JavaのオブジェクトとJSON形式のテキストデータを
+// 相互変換するためのクラス。
+// JsonbはJSONデータを元に自動的にこのクラスのインスタンスを作るため、
+// 引数なしのコンストラクタやsetterは省略できません。
+public class Memo {	
+	private String author;
 	public String getAuthor() {
 		return author;
 	}
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+	
+	private String text;
 	public String getText() {
 		return text;
 	}
 	public void setText(String text) {
 		this.text = text;
 	}
+	
+	private LocalDateTime createdAt;
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
@@ -28,11 +38,7 @@ public class Memo {
 		this.createdAt = createdAt;
 	}
 	
-	// JSONのデシリアライズのためにデフォルトコンストラクタが必要
+	// 引数なしのコンストラクタ。中身は空っぽでよいです。
 	public Memo() {
 	}
-	
-	private String author;
-	private String text;
-	private LocalDateTime createdAt;
 }

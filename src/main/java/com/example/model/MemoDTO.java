@@ -1,23 +1,22 @@
 package com.example.model;
 
+// ServletからJSPへ渡すJavaBeans
 public class MemoDTO {
+	// JSP側では読み取りのみなのでsetterは省略できます。
+	// ただ、setterがあっても大きな問題はないです。
+	private String author;
 	public String getAuthor() {
 		return author;
 	}
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+	
+	private String text;
 	public String getText() {
 		return text;
 	}
-	public void setText(String text) {
-		this.text = text;
-	}
+	
+	private String date;
 	public String getDate() {
 		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
 	}
 	
 	public MemoDTO(String author, String text, String date) {
@@ -26,7 +25,6 @@ public class MemoDTO {
 		this.date = date;
 	}
 	
-	private String author;
-	private String text;
-	private String date;
+	// 今回、このクラスは必ず手動でインスタンス化するため、
+	// 引数なしの省略できます。あっても問題はないです。
 }
