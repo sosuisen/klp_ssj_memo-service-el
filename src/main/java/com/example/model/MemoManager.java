@@ -5,39 +5,49 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-import jakarta.json.bind.Jsonb;
-import jakarta.json.bind.JsonbBuilder;
+import java.time.format.DateTimeFormatter;
 
 public class MemoManager {
-	// JSONファイルの書き込み、読み込みを実行するモデルです。
+	// テキストファイルの書き込み、読み込みを実行する単純なモデルです。
 	
-	private Jsonb jsonb = JsonbBuilder.create();
+	private String filePath = "c:\\pleiades\\2024-03\\memo2.txt";
 	
-	private String filePath = "c:\\pleiades\\2024-03\\memo.json";
-	
-	public ArrayList<Memo> getMemoList() {
+	public String getMemo() {
 		try {
-			return jsonb.fromJson(Files.readString(Path.of(filePath)), new ArrayList<Memo>(){}.getClass().getGenericSuperclass());
+			return Files.readString(Path.of(filePath));
 		} catch (NoSuchFileException e) {
 			System.out.println("File not found: " + filePath);
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		return new ArrayList<Memo>();
+		return "";
 	}
 	
 	synchronized public void addMemo(String text) {
 		try {
-			var memo = new Memo(text, LocalDateTime.now());
-			var memoList = getMemoList();
-			memoList.add(memo);
+			var oldMemo = getMemo();
+
+			text = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "," + text;
 			
-            Files.writeString(Path.of(filePath), jsonb.toJson(memoList));
+			var newMemo = "";
+			if (oldMemo.isEmpty()) {
+				newMemo = text;
+            }
+            else {
+                newMemo = oldMemo + "\n" + text;
+            }
+            Files.writeString(Path.of(filePath), newMemo);
         } catch (IOException e) {
             e.printStackTrace();
         }
+	}
+	
+	synchronized public void clearMemo() {
+		try {
+			Files.deleteIfExists(Path.of(filePath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

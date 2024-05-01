@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +9,10 @@
 </head>
 <body>
 	<h1>メモを入力してください</h1>
-	
 	<form action="./" method="post">
 		<input type="text" name="memo">
-		<button>追加</button>
+		<button name="action" value="add">追加</button><br>
+		<button name="action" value="clear">クリア</button>
 	</form>
 	<h2>メモ一覧</h2>
 	<ul>
