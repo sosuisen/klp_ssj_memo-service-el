@@ -11,9 +11,15 @@ public class MemoDTO {
 		return date;
 	}
 
-	public MemoDTO(String text, String date) {
+	private String author;
+	public String getAuthor() {
+		return author;
+	}
+
+	public MemoDTO(String text, String date, String author) {
 		super();
 		this.text = text;
 		this.date = date;
+		this.author = author;
 	}	
 }

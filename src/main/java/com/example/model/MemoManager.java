@@ -24,11 +24,11 @@ public class MemoManager {
 		return "";
 	}
 	
-	synchronized public void addMemo(String text) {
+	synchronized public void addMemo(String author, String text) {
 		try {
 			var oldMemo = getMemo();
 
-			text = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "," + text;
+			text = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "," + author + "," + text;
 			
 			var newMemo = "";
 			if (oldMemo.isEmpty()) {

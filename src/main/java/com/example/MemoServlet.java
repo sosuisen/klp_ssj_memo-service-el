@@ -26,9 +26,9 @@ public class MemoServlet extends HttpServlet {
 			for (var memo: allMemo.split("\n")) {
 				// date,textの順
 				var array = memo.split(",");
-				if(array.length == 2) {
+				if(array.length == 3) {
 					// コンストラクタ引数はtext,dateの順
-                    memoDTOList.add(new MemoDTO(array[1], array[0]));
+                    memoDTOList.add(new MemoDTO(array[2], array[0], array[1]));
                 }
 			}
 		}
@@ -41,11 +41,12 @@ public class MemoServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		// Webブラウザから送られてきたデータを取得します。
+		var author = request.getParameter("author");		
 		var memo = request.getParameter("memo");
 
 		var action = request.getParameter("action");
 		switch(action) {
-			case "add" -> model.addMemo(memo);
+			case "add" -> model.addMemo(author, memo);
 			case "clear" -> model.clearMemo();
         }
 		
